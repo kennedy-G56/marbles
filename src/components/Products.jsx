@@ -51,8 +51,10 @@ const products = [
 const Products = () => {
   return (
     <section className="bg-white text-gray-800 py-24 px-6 md:px-12 lg:px-24">
+      
+      {/* === TITLE === */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
           Our Marble Collection
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -60,28 +62,33 @@ const Products = () => {
         </p>
       </div>
 
+      {/* === SWIPER === */}
       <Swiper
         slidesPerView={1}
-        spaceBetween={20}
+        spaceBetween={30}
         pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 4 },
         }}
         modules={[Pagination]}
-        className="mySwiper"
+        className="pb-10"
       >
         {products.map((product) => (
           <SwiperSlide key={product.id}>
-            <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
               <img
                 src={product.img}
                 alt={product.name}
-                className="h-56 w-full object-cover hover:scale-105 transition-transform duration-300"
+                className="h-64 w-full object-cover rounded-t-2xl hover:scale-105 transition-transform duration-300"
               />
               <div className="p-6 text-center">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h3>
-                <p className="text-green-600 font-medium">{product.price}</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {product.name}
+                </h3>
+                <p className="text-green-600 font-semibold text-sm">
+                  {product.price}
+                </p>
               </div>
             </div>
           </SwiperSlide>

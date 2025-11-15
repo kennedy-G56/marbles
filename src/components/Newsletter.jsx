@@ -1,5 +1,5 @@
 import React from "react";
-import MarbleBg from "../assets/marbles2/marblebg.jpeg"; 
+import MarbleBg from "../assets/marbles2/marblebg.jpeg";
 
 const Newsletter = () => {
   return (
@@ -7,35 +7,33 @@ const Newsletter = () => {
       className="relative bg-cover bg-center bg-no-repeat py-20"
       style={{ backgroundImage: `url(${MarbleBg})` }}
     >
-   
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/40"></div>
 
-      <div className="relative container mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-8">
-  
-        <div className="md:w-1/2 space-y-4 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Get Exclusive Offers on <br /> Premium Marble Designs
+      <div className="relative container mx-auto px-6 md:px-12 flex justify-end">
+        {/* RIGHT SIDE CONTENT BLOCK */}
+        <div className="w-full md:w-[45%] text-white space-y-4">
+
+          <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+            Get more discount <br /> Off your order
           </h2>
-          <p className="text-gray-700 text-lg">
-            Join our mailing list and enjoy special discounts, design inspiration, 
-            and early access to new marble collections.
-          </p>
-        </div>
 
-        <form className="md:w-1/2 flex items-center justify-center md:justify-end bg-white shadow-lg rounded-full overflow-hidden max-w-md w-full">
-          <input
-            type="email"
-            placeholder="Your email address"
-            className="w-full px-6 py-3 text-gray-700 focus:outline-none"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-r-full transition-all duration-300"
-          >
-            Subscribe
-          </button>
-        </form>
+          <p className="text-sm opacity-90">Join our mailing list</p>
+
+          {/* INPUT + BUTTON MATCHES TEACHER STYLE */}
+          <div className="flex items-center gap-3 mt-4">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="w-[260px] md:w-[300px] px-4 py-3 rounded-md text-gray-700 bg-white focus:outline-none shadow-md"
+            />
+
+            <button className="px-4 py-3 bg-[#1C1C1E] text-white rounded-md font-semibold text-sm hover:bg-black transition">
+              Shop Now
+            </button>
+          </div>
+
+        </div>
       </div>
     </section>
   );
