@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import "swiper/css/navigation";
 
 import marble1 from "../assets/products/marble1.jpeg";
 import marble2 from "../assets/products/marble2.jpeg";
@@ -49,10 +51,11 @@ const products = [
 ];
 
 const Products = () => {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   return (
     <section className="bg-white text-gray-800 py-24 px-6 md:px-12 lg:px-24">
-      
-      {/* === TITLE === */}
       <div className="text-center mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
           Our Marble Collection
@@ -62,40 +65,121 @@ const Products = () => {
         </p>
       </div>
 
-      {/* === SWIPER === */}
+      {/* SWIPER */}
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
-        pagination={{ clickable: true }}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 4 },
+        pagination={{
+          el: ".swiper-pagination",
+          clickable: true,
         }}
-        modules={[Pagination]}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        onInit={(swiper) => {
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.init();
+          swiper.navigation.update();
+        }}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 1 },
+          1024: { slidesPerView: 1 },
+        }}
+        modules={[Pagination, Navigation]}
         className="pb-10"
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
-            <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <img
-                src={product.img}
-                alt={product.name}
-                className="h-64 w-full object-cover rounded-t-2xl hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-6 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  {product.name}
-                </h3>
-                <p className="text-green-600 font-semibold text-sm">
-                  {product.price}
-                </p>
+        {Array.from({ length: Math.ceil(products.length / 8) }).map((_, i) => {
+          const chunk = products.slice(i * 8, i * 8 + 8);
+
+          return (
+            <SwiperSlide key={i}>
+              {/* TOP ROW */}
+              <div
+                className="
+                  grid grid-cols-1
+                  sm:grid-cols-1
+                  md:grid-cols-2
+                  lg:grid-cols-4
+                  gap-8
+                "
+              >
+                {chunk.slice(0, 4).map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+
+              {/* BOTTOM ROW */}
+              <div
+                className="
+                  grid grid-cols-1
+                  sm:grid-cols-1
+                  md:grid-cols-2
+                  lg:grid-cols-4
+                  gap-8 mt-8
+                "
+              >
+                {chunk.slice(4, 8).map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
+
+      {/* BUTTONS + DOTS */}
+      <div className="flex justify-center items-center gap-3 mt-6">
+        <button
+          ref={prevRef}
+          className="w-6 h-6 flex items-center justify-center rounded-full shadow-md bg-white 
+            hover:bg-sky-300 text-xl"
+        >
+          ←
+        </button>
+
+        <div className="swiper-pagination !w-auto !flex !gap-2"></div>
+
+        <button
+          ref={nextRef}
+          className="w-6 h-6 flex items-center justify-center rounded-full shadow-md bg-white 
+            hover:bg-sky-300 text-xl"
+        >
+          →
+        </button>
+      </div>
     </section>
   );
 };
+
+const ProductCard = ({ product }) => (
+  <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="relative">
+      <img
+        src={product.img}
+        alt={product.name}
+        className="h-64 w-full object-cover rounded-t-2xl"
+      />
+
+      <button
+        className="absolute bottom-3 right-3 bg-white shadow-md hover:bg-gray-100 
+          text-gray-600 w-5 h-5 flex items-center justify-center rounded-full text-xl font-bold"
+      >
+        +
+      </button>
+    </div>
+
+    <div className="p-6 text-center">
+      <h3 className="text-lg font-semibold text-gray-900 mb-1">
+        {product.name}
+      </h3>
+      <p className="text-green-600 font-semibold text-sm">
+        {product.price}
+      </p>
+    </div>
+  </div>
+);
 
 export default Products;

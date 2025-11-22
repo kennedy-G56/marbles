@@ -13,3 +13,21 @@
 .swiper-button-next:hover {
   color: #555;
 }
+.swiper-pagination {
+  position: static !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #c4c4c4;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3b82f6; /* blue */
+}

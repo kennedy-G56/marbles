@@ -6,14 +6,14 @@ const Navigation = ({ mobile }) => {
       <ul
         className={
           mobile
-            ? "flex flex-col space-y-4 text-white"
-            : "flex space-x-8 text-white"
+            ? "flex flex-col space-y-4 text-white text-lg"
+            : "flex space-x-8 text-white text-lg"
         }
       >
-        <li className="hover:text-yellow-400 cursor-pointer">Home</li>
-        <li className="hover:text-yellow-400 cursor-pointer">About</li>
-        <li className="hover:text-yellow-400 cursor-pointer">Services</li>
-        <li className="hover:text-yellow-400 cursor-pointer">Contact</li>
+        <li className="hover:text-yellow-400 cursor-pointer transition">Home</li>
+        <li className="hover:text-yellow-400 cursor-pointer transition">About</li>
+        <li className="hover:text-yellow-400 cursor-pointer transition">Services</li>
+        <li className="hover:text-yellow-400 cursor-pointer transition">Contact</li>
       </ul>
     </nav>
   );
