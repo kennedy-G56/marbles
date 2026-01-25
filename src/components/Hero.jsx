@@ -21,7 +21,8 @@ const Hero = () => {
       {/* Center Hero Content */}
       <div className="relative z-10 flex-grow flex flex-col justify-center items-center text-center px-6 md:px-12">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white mb-6 drop-shadow-lg max-w-3xl">
-          Creative Marble Design for Elegant Spaces
+          Creative Marble Design{' '} 
+          <span className="bg-gradient-to-r from-orange-400 to-amber-800 text-transparent bg-clip-text">for Elegant Spaces</span>
         </h1>
 
         <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
